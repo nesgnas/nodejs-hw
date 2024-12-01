@@ -15,6 +15,18 @@ const StatusCode = Object.freeze({
     SERVICE_UNAVAILABLE: 503,
 });
 
+export const Message = Object.freeze({
+    MISSING_FIELD: "Bad request: Missing fields",
+    DATA_EXIST: "Data already exists",
+    INTERNAL_SERVER_ERROR: "Internal server error",
+    BAD_REQUEST: "Bad request",
+    DATA_NOT_FOUND: "Data not found"
+})
+
+export const URI = Object.freeze({
+    USER: '/userData'
+})
+
 // Read the entire data from the file
 async function readFile() {
     try {

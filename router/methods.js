@@ -1,23 +1,23 @@
 const url = require("url");
 var routerMethods = {
-    GET: function (req, res, path, callback) {
-        if (path === url.parse(req.url, true).pathname && req.method === "GET") {
-            callback(req, res);
+    GET: function (request, response, path, callback) {
+        if (path === url.parse(request.url, true).pathname && request.method === "GET") {
+            callback(request, response);
         }
     },
-    POST: function (req, res, path, callback) {
-        if (path === req.url && req.method === "POST") {
-            callback(req, res);
+    POST: function (request, response, path, callback) {
+        if (path === request.url && request.method === "POST") {
+            callback(request, response);
         }
     },
-    DELETE: function (req, res, path, callback) {
-        if (path === url.parse(req.url, true).pathname && req.method === "DELETE") {
-            callback(req, res);
+    DELETE: function (request, response, path, callback) {
+        if (path === url.parse(request.url, true).pathname && request.method === "DELETE") {
+            callback(request, response);
         }
     },
-    PUT: function (req, res, path, callback) {
-        if (path === url.parse(req.url, true).pathname && req.method === "PUT") {
-            callback(req, res);
+    PUT: function (request, response, path, callback) {
+        if (path === url.parse(request.url, true).pathname && request.method === "PUT") {
+            callback(request, response);
         }
     },
 };

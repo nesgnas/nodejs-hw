@@ -1,8 +1,8 @@
 var userRouter = require('./database');
 
 var router = {
-    run: function(req, res) {
-        userRouter.run(req, res);
+    run: function(request, response) {
+        userRouter.run(request, response);
     }
 };
 

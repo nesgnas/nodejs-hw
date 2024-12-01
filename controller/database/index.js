@@ -1,4 +1,5 @@
 const { StatusCode, readFile, writeFile, deleteObject, getBody } = require("../../utils.js");
+const {Message} = require("../../utils");
 
 // Get all data
 async function getAllData(request, response) {
@@ -13,7 +14,7 @@ async function getAllData(request, response) {
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -27,7 +28,7 @@ async function createData(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Bad request: Missing fields");
+            response.end(Message.MISSING_FIELD);
             return;
         }
 
@@ -37,7 +38,7 @@ async function createData(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Data already exists");
+            response.end(Message.DATA_EXIST);
         } else {
             const id = dataList.length ? Math.max(dataList.map(item => item.id)) + 1 : 1;
             dataList.push({ id, username, password, token });
@@ -52,7 +53,7 @@ async function createData(request, response) {
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -64,7 +65,7 @@ async function deleteData(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Bad request");
+            response.end(Message.BAD_REQUEST);
             return;
         }
         const id = Number(idFromUrl);
@@ -78,7 +79,7 @@ async function deleteData(request, response) {
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -93,7 +94,7 @@ async function updateData(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Bad request");
+            response.end(Message.BAD_REQUEST);
             return;
         }
 
@@ -114,14 +115,14 @@ async function updateData(request, response) {
             response.writeHead(StatusCode.NOT_FOUND, {
                 "Content-Type": "text/plain",
             });
-            response.end("Data not found");
+            response.end(Message.DATA_NOT_FOUND);
         }
     } catch (error) {
         console.error("Error updating data", error);
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -133,7 +134,7 @@ async function getDataById(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Bad request");
+            response.end(Message.BAD_REQUEST);
             return;
         }
         const id = Number(idFromUrl);
@@ -155,7 +156,7 @@ async function getDataById(request, response) {
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -167,7 +168,7 @@ async function searchData(request, response) {
             response.writeHead(StatusCode.BAD_REQUEST, {
                 "Content-Type": "text/plain",
             });
-            response.end("Bad request");
+            response.end(Message.BAD_REQUEST);
             return;
         }
         let dataList = await readFile();
@@ -181,7 +182,7 @@ async function searchData(request, response) {
         response.writeHead(StatusCode.INTERNAL_SERVER_ERROR, {
             "Content-Type": "text/plain",
         });
-        response.end("Internal server error");
+        response.end(Message.INTERNAL_SERVER_ERROR);
     }
 }
 
